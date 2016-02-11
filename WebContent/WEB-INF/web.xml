@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<web-app 
+	id="WebApp_ID" version="3.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+ 	<display-name>Servlet-On-Database-Connect</display-name>
+ 	<welcome-file-list>
+ 	   	<welcome-file>index.html</welcome-file>
+    		<welcome-file>index.htm</welcome-file>
+    		<welcome-file>index.jsp</welcome-file>
+    		<welcome-file>default.html</welcome-file>
+    		<welcome-file>default.htm</welcome-file>
+    		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+<listener>
+    <listener-class>ua.datapark.commons.ApplicationContextListener</listener-class>
+</listener>
+<filter>
+    <description>Changes the encoding of the request, in order to help the appserver to correctly interpret request params UTF-8</description>
+    <filter-name>EncodingFilter</filter-name>
+    <filter-class>ua.datapark.commons.EncodingFilter</filter-class>
+    <init-param>
+      <param-name>request-encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+    <init-param>
+      <param-name>response-encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+</filter>
+<filter-mapping>
+    <filter-name>EncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+<servlet>
+    <description>ORACLE server connection and show ANY table data</description>
+    <servlet-name>ServletDBConnect</servlet-name>
+    <servlet-class>java4s.ServletDatabaseConnect</servlet-class>
+</servlet>
+<servlet-mapping>
+    <servlet-name>ServletDBConnect</servlet-name>
+    <url-pattern>/show.do</url-pattern>
+ </servlet-mapping>
+</web-app>
